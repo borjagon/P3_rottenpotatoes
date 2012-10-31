@@ -1,0 +1,37 @@
+1)Se ha programado en el movies_controller.rb, en la parte del index que cuando se pulse en ordenar por titulo o por fecha, estos queden resaltados. El resaltado se lleva acabo mediante la llamada a 'hilite' que esta programado dentro del css de nuestra aplicación.
+
+
+
+2)Se hace con un case y dependiendo del parámetro pulsado,'title' o 'release_date' se ordenen mediante la siguiente linea de código:
+ sort = params[:sort]
+
+El código del index es lo que hace que se envie así dicho criterio de ordenación. 
+  = hidden_field_tag :sort, "title" if @title_header
+  = hidden_field_tag :sort, "release_date" if @date_header
+
+Viaja en la URL (?utf8=✓&sort=title&ratings[PG-13]=1&ratings[NC-17]=1&ratings[R]=1&commit=Refresh). Esta forma de solicitar la ordenacion es REST puesto que la información solicitada va en la URL.
+
+
+
+3) Se recibe en el controlador mediante: @selected_ratings = params[:ratings] || {}
+
+El codigo que hace que se envie así es
+= check_box_tag "ratings[#{rating}]", 1, @selected_ratings.include?(rating), :id => "ratings_#{rating}"
+
+Viaja en la URL (?utf8=✓&sort=title&ratings[PG-13]=1&ratings[NC-17]=1&ratings[R]=1&commit=Refresh). Esta forma de solicitar la ordenacion es REST puesto que la información solicitada va en la URL.
+
+4) La BD se ha programado como un Hash donde se han ordenado las peliculas por el rating, el tipo de rating es un key y dependiendo de lo que quiera el usuario se muestran las peliculas que tengan ese key o no.
+
+@movies = Movie.find_all_by_rating(@selected_ratings.keys, ordering)
+
+
+5) Se inicializan mediante la siguiente linea de código:
+ = check_box_tag "ratings[#{rating}]", 1, @selected_ratings.include?(rating), :id => "ratings_#{rating}"
+
+
+6)En la variable params[:sort] y entonces se almacena porque nos mantenemos en el index
+
+7)En la variable params[:ratings] ocurre lo mismo que en el apartado anterior
+
+
+

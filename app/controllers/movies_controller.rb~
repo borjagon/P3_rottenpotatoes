@@ -35,9 +35,8 @@ class MoviesController < ApplicationController
     @selected_ratings = params[:ratings] || {}
 
 
-    if @selected_ratings != {}
-      session[:ratings] = params[:ratings]
-    end
+    #if @selected_ratings != {}
+      #session[:ratings] = params[:ratings]
     
     if @selected_ratings == {} 
       @selected_ratings = Hash[@all_ratings.map {|rating| [rating, rating]}]

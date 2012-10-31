@@ -18,7 +18,6 @@ Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
   regexp = /#{e1}.*#{e2}/m
   page.body.should=~ regexp
   #flunk 'No implementado'
-  #transpa 71
 end
 
 # Make it easier to express checking or unchecking several boxes at once
