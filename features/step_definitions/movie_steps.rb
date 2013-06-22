@@ -28,7 +28,8 @@ end
 
 When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
   rating_list.split.each do |rating|
-    if uncheck
+    puts rating_list
+    if uncheck then
       uncheck("ratings_#{rating}")
     else
       check("ratings_#{rating}")
@@ -45,11 +46,10 @@ end
 
 Then /I should see all of the movies/ do
 
-  division=page.body.split('<tr>')
+  division=page.body.split(/<tr>/i)
   filas=division.length - 2
-  filas.should ==Movie.all.count
+  filas.should ==Movie.all.length
 end
-
 
 
 
